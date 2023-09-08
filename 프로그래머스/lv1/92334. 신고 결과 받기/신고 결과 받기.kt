@@ -1,19 +1,18 @@
 class Solution {
-    fun solution(id_list: Array<String>, reports: Array<String>, k: Int): IntArray {
+    fun solution(id_list: Array<String>, report: Array<String>, k: Int): IntArray {
         var answer = mutableListOf<Int>()
         val id_index = mutableMapOf<String, Int>()
         val flag_data = mutableMapOf<String, MutableSet<String>>()
         
-        // 0. id_list : index, 형태의 Map 셋업
+        // 0. <id, index> 형태의 Map 셋업
         for((index, id) in id_list.withIndex()) {
             answer.add(0)
             id_index[id] = index
         }
         
         // 1. '키 : 신고당한사람', 'value : 신고한 사람들' 형태의 Map 셋업
-        for(report in reports) {
-            val from = report.split(' ')[0]
-            val to = report.split(' ')[1]
+        report.forEach {
+            val (from, to) = it.split(" ")
             
             if (flag_data.containsKey(to)) { // 이미 존재하는 키인 경우
                 flag_data[to]?.add(from) // 존재하지 않는 키인 경우
@@ -21,6 +20,7 @@ class Solution {
                 flag_data[to] = mutableSetOf(from)
             }
         }
+        
         // 2. Map을 순회하며 value의 array.size > k 일때, answer에 ++후 반환
         for ((key, items) in flag_data) {
             if(items.size < k)
