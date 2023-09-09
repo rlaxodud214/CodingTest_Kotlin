@@ -2,7 +2,7 @@ class Solution {
     // 카탈랑 수 : 이진 트리의 수를 셀 때 등장하는 수열
     fun solution(n: Int): Int { // DP - 바텀업
         var answer = 0
-        var dp = mutableListOf(1, 1, 2, 5)
+        // var dp = mutableListOf(1, 1, 2, 5)
         /*
         n = 1) () 1
         n = 2) (()), ()() 2
@@ -25,12 +25,31 @@ class Solution {
         dp[n] = 2(2n-1)/(n+1) * dp[n-1]
               = (4n-2)/(n+1) * dp[n-1]
         */
-            
-        return Catalan(n)
-    }
-    fun Catalan(n: Int): Int {
-        if(n == 1) return 1
         
-        return ((4.0*n-2) / (n+1) * Catalan(n-1)).toInt()
+        // 다른 사람의 풀이 n == 4로 디버깅
+        // 느낀점 : 메모이제이션으로 dp를 백업하며 바텀업을 쓰는 게 시간상 매우 빠르다.
+        val dp = Array(n + 1) { 0 } // size 5
+        
+        dp[0] = 1
+        dp[1] = 1
+        
+        for (i in 2..n)     // i = 2   / 3       / 4          / 5
+            for (j in 1..i) // j = 1,2 / 1, 2, 3 / 1, 2, 3, 4 / 1, 2, 3, 4, 5
+                dp[i] += dp[j - 1] * dp[i - j]
+                /* dp[2] += dp[0] * dp[1] 
+                          + dp[1] * dp[0] / dp[2] += 1 + 1 / dp[2] = 2
+                          
+                   dp[3] += dp[0] * dp[2] 
+                          + dp[1] * dp[1]
+                          + dp[2] * dp[0] / dp[3] += 2 + 1 + 2 / dp[3] = 5
+                */
+        return dp[n]
+            
+        // return Catalan(n)
     }
+//     fun Catalan(n: Int): Int {
+//         if(n == 1) return 1
+        
+//         return ((4.0*n-2) / (n+1) * Catalan(n-1)).toInt()
+//     }
 }
