@@ -1,9 +1,21 @@
 class Solution {
     fun solution(numbers: IntArray): String {
-        var answer = mergeSort(numbers).joinToString("")
-        if(answer.all {it == '0'})
-            answer = "0"
+        var answer: String = ""
+        /* Kotiln에서 쓰는 배열 정렬함수
+        1. sorted() / sortedDescending() : 오름차순 / 내림차순 정렬 (조건 X)
+        2. sortedBy() / sortedByDescending() : value의 특성을 기반으로 정렬 ex) 배열.sortedBy { it.length } or 배열.sortedBy { it.last() }
+        3. sortedWith(): Comparator를 사용하여 정렬된 새로운 배열을 반환 -> 많이 쓸 듯                                                    */
+        
+        numbers.sortedWith(Comparator { 
+            a, b -> "$b$a".compareTo("$a$b")
+        }).forEach { answer += it }
+        
+        if(answer.all {it == '0'}) answer = "0"
+        
         return answer
+        
+        // var answer = mergeSort(numbers).joinToString("")
+        // return answer
     }
     
     fun mergeSort(arr: IntArray): IntArray {
@@ -22,10 +34,9 @@ class Solution {
         var (lei, rii, rei) = Triple(0, 0, 0)
         
         while(lei < left.size && rii < right.size) {
-            // Point : 이 로직만 잘 바꾸면 끝
             // left+right 순서로 붙였을 때랑 right+left 순서로 붙였을 때랑 크기 비교
-            val lPlusR = (left[lei].toString() + right[rii].toString()).toInt()
-            val rPlusL = (right[rii].toString() + left[lei].toString()).toInt()
+            val lPlusR = left[lei].toString() + right[rii].toString()
+            val rPlusL = right[rii].toString() + left[lei].toString()
 
             if(lPlusR > rPlusL) 
                 result[rei++] = left[lei++]
