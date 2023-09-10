@@ -1,10 +1,10 @@
 # [unrated] 택배 배달과 수거하기 - 150369 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/150369#) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/150369?language=python3) 
 
 ### 성능 요약
 
-메모리: 83.3 MB, 시간: 62.55 ms
+메모리: 22.4 MB, 시간: 42.01 ms
 
 ### 구분
 
