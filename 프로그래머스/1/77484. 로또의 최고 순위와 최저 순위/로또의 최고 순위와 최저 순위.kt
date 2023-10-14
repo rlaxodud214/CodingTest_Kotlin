@@ -13,7 +13,11 @@ class Solution {
         // 3. 최소 순위 = 7 - 당첨 숫자 개수
         var max = 7 - matchCount - zeroCount
         var min = 7 - matchCount
-                
-        return intArrayOf(max, min).map { if (it >= 6) 6 else it }.toIntArray()
+        
+        // map 썼을 때, 5.89ms -> if문 썼을 때, 0.02ms 시간차이 많이남
+        if(max > 6) max = 6
+        if(min > 6) min = 6
+        
+        return intArrayOf(max, min)
     }
 }
