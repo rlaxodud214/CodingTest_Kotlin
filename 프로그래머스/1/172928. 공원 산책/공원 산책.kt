@@ -2,7 +2,6 @@ class Solution {
     fun solution(park: Array<String>, routes: Array<String>): IntArray {
         // 0. 공원의 최대 인덱스 구하기
         var (H, W) = intArrayOf(park.size, park[0].length)
-        println("x : $H, y : $W")
         
         // 1. park에서 S 및 X들의 위치(좌표x-y)를 찾는다.
         var point = intArrayOf(-1, -1)
@@ -35,57 +34,36 @@ class Solution {
                     if(point[0] - n < 0)
                         return@forEach
                     
-                    (1..n).map { i ->
-                        check.add("${point[0] - i}, ${point[1]}")
-                    }
-                    check.map { it ->
-                        if(it in x) 
+                    for (i in 1..n)
+                        if("${point[0] - i}, ${point[1]}" in x) 
                             return@forEach
-                    }
-                    
                     newPoint[0] = point[0] - n
                 }
                 "S" -> {
                     if(point[0] + n > H - 1)
                         return@forEach
                     
-                    (1..n).map { i ->
-                        check.add("${point[0] + i}, ${point[1]}")
-                    }
-                    println(check.joinToString(" 및 "))
-                    check.map { it ->
-                        if(it in x) 
+                    for (i in 1..n)
+                        if("${point[0] + i}, ${point[1]}" in x) 
                             return@forEach
-                    }
-                    
                     newPoint[0] = point[0] + n
                 }
                 "W" -> {
                     if(point[1] - n < 0)
                         return@forEach
                     
-                    (1..n).map { i ->
-                        check.add("${point[0]}, ${point[1] - i}")
-                    }
-                    check.map { it ->
-                        if(it in x) 
+                    for (i in 1..n)
+                        if("${point[0]}, ${point[1] - i}" in x) 
                             return@forEach
-                    }
-                    
                     newPoint[1] = point[1] - n
                 }
                 "E" -> {
                     if(point[1] + n > W - 1)
                         return@forEach
                     
-                    (1..n).map { i ->
-                        check.add("${point[0]}, ${point[1] + i}")
-                    }
-                    check.map { it ->
-                        if(it in x) 
+                    for (i in 1..n)
+                        if("${point[0]}, ${point[1] + i}" in x) 
                             return@forEach
-                    }
-                    
                     newPoint[1] = point[1] + n
                 }
             }
@@ -97,4 +75,3 @@ class Solution {
         return point
     }
 }
-
