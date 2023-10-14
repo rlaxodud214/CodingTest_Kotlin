@@ -18,7 +18,7 @@
 //     }
 // }
 
-// 자료형을 List 대신 Array로 선택했을 떄, 성능-메모리 차이 체크
+// 자료형을 List 대신 Array로 선택했을 떄, 성능-메모리 차이 체크 -> 성능 2배 증가, 메모리 3MB 더 사용함 ??
 class Solution {
     fun solution(N: Int, stages: IntArray): IntArray {
         val rates = Array<Pair<Int, Float>>(N) { Pair(0, 0.0f) }
