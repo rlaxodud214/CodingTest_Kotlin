@@ -5,9 +5,9 @@ class Solution {
         
         // 1. 매개변수 3개를 이용 -> 학생이 보유한 체육복의 수를 값으로 하는 배열 만들기
         var storageA = IntArray(n + 1) { 1 } // n + 1개 생성, 0번은 빈자리로 채워서 No 맞추기
-        reserve.forEach { i -> storageA[i]++ }
-        lost.forEach { i -> storageA[i]-- } // lost가 도난 당한 경우 포함
-        var storageB = storageA.copyOf() // CaseB를 위함 -> 우선 구현 후 1개로 통합하는 최적화 진행
+        reserve.forEach { i -> storageA[i] = 2 }
+        lost.forEach { i -> storageA[i] -= 1 } // lost가 도난 당한 경우 포함
+        var storageB = storageA.copyOf() // CaseB를 위함
         
         // 2. reserve를 순회하며 좌-우에 lost가 있는지 파악하고 체육복 전달하기
         reserve.forEach { i -> 
