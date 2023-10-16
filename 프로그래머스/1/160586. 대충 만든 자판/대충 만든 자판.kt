@@ -15,21 +15,19 @@ class Solution {
                 }    
             }
         }
-        print(map.toString())
         
         // 2. map을 이용해서 targets을 완성하는 최소값 합산하기
-        targets.forEach {
+        // 다른 사람의 풀이 -> 아래처럼 "outer@"를 명시적으로 지칭할 수 있음!! + 이름 수정 가능함
+        targets.forEach outer@{
             var ac = it.fold(0) { acc, ch -> 
+                // ch가 map의 키값에 없다면 -1 추가하기
                 if (!map.containsKey(ch)) {
                     answer.add(-1)
-                    return@forEach
+                    return@outer
                 }
-                acc + (map[ch] ?: 0)
+                acc + map[ch]!!
             }
-            if (ac == 0)
-                answer.add(-1)
-            else
-                answer.add(ac)
+            answer.add(ac)
         }
         return answer.toIntArray()
     }
