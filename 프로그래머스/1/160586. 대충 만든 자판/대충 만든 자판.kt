@@ -19,12 +19,6 @@ class Solution {
             }
         }
         
-        keymap.forEach { keys ->
-            keys.forEachIndexed { i, ch ->
-                
-            }
-        }
-        
         // 2. map을 이용해서 targets을 완성하는 최소값 합산하기
         // 다른 사람의 풀이 -> 아래처럼 "outer@"를 명시적으로 지칭할 수 있음!! + 이름 수정 가능함
         targets.forEach outer@{
