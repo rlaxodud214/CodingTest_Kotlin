@@ -13,6 +13,15 @@ class Solution {
                 else if (map[ch]!! > index + 1) {
                     map[ch] = index + 1
                 }    
+                // [다른 사람 코드] 위 if, else if와 같은 코드 
+                // minOf(기존 else if), "?:"(기존 if) 연산자를 사용함
+                // map[ch] = minOf(map[ch] ?: 100, i + 1) 
+            }
+        }
+        
+        keymap.forEach { keys ->
+            keys.forEachIndexed { i, ch ->
+                
             }
         }
         
