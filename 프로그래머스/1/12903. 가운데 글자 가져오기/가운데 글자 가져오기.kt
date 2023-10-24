@@ -3,7 +3,10 @@ class Solution {
         val middleIndex = s.length / 2
         val isOddLength = s.length % 2
 
-        return if (isOddLength == 1) middleChar(s, middleIndex) else middleTwoChar(s, middleIndex)
+        if (isOddLength == 1) {
+            return middleChar(s, middleIndex)  
+        }  
+        return middleTwoChar(s, middleIndex)
     }
     // s의 길이가 홀수
     fun middleChar(s: String, middleIndex: Int) = s[middleIndex].toString() 
