@@ -1,9 +1,8 @@
 class Solution {
     fun solution(numbers: IntArray): Int {
-        var intRange = Array(9) { it + 1 } // 1..10
-        val answer = intRange.filter { it !in numbers }
-            .sumOf { it }
+        var numberRange = Array(9) { it + 1 } // 0..8 -> 1..9
         
-        return answer
+        return numberRange.filter { it !in numbers }
+            .sumOf { it }
     }
 }
