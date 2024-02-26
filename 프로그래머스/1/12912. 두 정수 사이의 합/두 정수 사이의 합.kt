@@ -3,6 +3,6 @@ class Solution {
         var al = a.toLong()
         var bl = b.toLong()
         
-        return (minOf(al, bl)..maxOf(al, bl)).sumOf { it }
+        return (minOf(al, bl)..maxOf(al, bl)).sum()
     }
 }
