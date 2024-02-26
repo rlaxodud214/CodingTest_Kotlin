@@ -1,3 +1,3 @@
 class Solution {
-    fun solution(numbers: IntArray) = numbers.sum() / (numbers.size).toFloat()
+    fun solution(numbers: IntArray) = numbers.average()
 }
