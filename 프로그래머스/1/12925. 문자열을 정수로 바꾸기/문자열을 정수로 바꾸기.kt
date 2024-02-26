@@ -1,5 +1,3 @@
 class Solution {
-    fun solution(s: String): Int {
-        return s.toInt()
-    }
+    fun solution(s: String) = s.toInt()
 }
