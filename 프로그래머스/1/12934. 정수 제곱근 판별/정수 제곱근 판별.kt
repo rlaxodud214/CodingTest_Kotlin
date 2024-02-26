@@ -6,7 +6,7 @@ class Solution {
             if (it*it == n)
                 return (it+1) * (it+1)
             
-            else if (it*it > n)
+            else if (it*it > n) // 효율
                 return@outer
         }
         return -1L
