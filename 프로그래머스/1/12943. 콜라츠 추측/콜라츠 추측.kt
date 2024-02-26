@@ -1,24 +1,18 @@
 class Solution {
     fun solution(num: Int): Int {
-        if( num == 1) 
-            return 0
+        var numAsLong = num.toLong()
         
-        var number = num.toLong()
-        
-        for (i in 1..500) {
-            print("$number  -> ")
-            
-            if ( number % 2 == 0L )
-                number /= 2
-
-            else 
-                number = number * 3 + 1
-            
-            if ( number == 1L )
+        for (i in 0..499) {
+            if (numAsLong == 1L)
                 return i
+            
+            print("$numAsLong  -> ")
+            
+            numAsLong = numAsLong.Collatz()                       
         }
-        // 느낀점 : 자리수가 크면 연산 시, 오버플로우로 데이터에 손실이 생길 수 있음 
-        //         -> Long으로 적절히 변환해서 사용할 것!
+        
         return -1
     }
+    
+    fun Long.Collatz() = if (this % 2 == 0L) this / 2 else this * 3 + 1
 }
