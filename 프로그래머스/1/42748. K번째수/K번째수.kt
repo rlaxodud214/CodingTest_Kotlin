@@ -1,14 +1,10 @@
 class Solution {
     fun solution(array: IntArray, commands: Array<IntArray>): IntArray {
-        val answer = mutableListOf<Int>()
-
-        for(command in commands) {
+        return commands.fold(listOf<Int>()) { acc, command ->
             val (i, j, k) = command.map { it - 1 }
-
             val subArray = array.sliceArray(i..j).sorted()
-
-            answer.add(subArray[k])
-        }
-        return answer.toIntArray()
+            
+            acc + subArray[k]
+        }.toIntArray()
     }
 }
