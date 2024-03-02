@@ -1,6 +1,6 @@
 class Solution {
     fun solution(phone_number: String): String {
-        var div = phone_number.length - 4
-        return "*".repeat(div) + phone_number.substring(div)
+        val divIndex = phone_number.length - 4
+        return "*".repeat(divIndex) + phone_number.takeLast(4)
     }
 }
