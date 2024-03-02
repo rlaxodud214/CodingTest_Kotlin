@@ -4,27 +4,8 @@ class Solution {
             return intArrayOf(-1)
         }
 
-        val minValueIndex = arr.minValueOfIndex()
-        
-        val mutableList = arr.toMutableList()
-        mutableList.removeAt(minValueIndex)
-        return mutableList.toIntArray()
-    }
-    
-    fun IntArray.minValueOfIndex(): Int {
-        var minValueIndex = 0
-        
-        this.forEachIndexed { index, value ->
-            if (this[minValueIndex] > value)
-                minValueIndex = index
-        }
-        
-        return minValueIndex
-    }
+        val minValue = arr.minOf { it }
 
-    // fun IntArray.removeAt(index: Int): IntArray {
-    //     return IntArray(this.size - 1) {
-    //         if (it < index) this[it] else this[it + 1]
-    //     }
-    // }
+        return arr.filter { it != minValue }.toIntArray()
+    }
 }
