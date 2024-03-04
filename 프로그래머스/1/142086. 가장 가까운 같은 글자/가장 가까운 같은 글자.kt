@@ -1,11 +1,12 @@
 class Solution {
     fun solution(s: String): IntArray {
-        var answer: IntArray = intArrayOf()
+        var answer = IntArray(s.length) { -1 } // -1 default 값 지정
         var nearIndex = mutableMapOf<Char, Int>()
 
-        s.forEachIndexed { index, ch ->
-            val isContainsKey = nearIndex.containsKey(ch)
-            answer += if(isContainsKey) index - nearIndex[ch]!! else -1
+        for ((index, ch) in s.withIndex()) {
+            if(nearIndex.containsKey(ch)) {
+                answer[index] =  index - nearIndex[ch]!!
+            }
             nearIndex[ch] = index
         }
         return answer
