@@ -3,18 +3,16 @@ class Solution {
         var answer = StringBuilder()
 
         // 첫 번째 인덱스를 제외하고 roof 돌리기
-        var round = 1
-        food.sliceArray(IntRange(1, food.size - 1)).map {
-            val canFoodCountByRound = it / 2
+        for ((index, i) in food.withIndex()) {
+            if (index == 0) continue
 
-            answer.append((round.toString()).repeat(canFoodCountByRound))
-            round += 1
-            
-            if (round == food.size) {
-                val answerBackup = answer.reversed()
-                answer.append(0)
-                answer.append(answerBackup)
-                return@map
+            val canFoodCountByRound = i / 2
+
+            answer.append((index.toString()).repeat(canFoodCountByRound))
+
+            if (index == food.size - 1) {
+                val reverseAnswer = answer.reversed()
+                answer.append(0, reverseAnswer)
             }
         }
 
