@@ -4,9 +4,9 @@ class Solution {
         var leftCount = n
 
         while (leftCount >= a) {
-            val giftCount = (leftCount / a) * b
-            answer += giftCount
-            leftCount = (leftCount % a) + giftCount
+            val getCount = (leftCount / a) * b
+            answer += getCount
+            leftCount = (leftCount % a) + getCount
         }
 
         return answer
