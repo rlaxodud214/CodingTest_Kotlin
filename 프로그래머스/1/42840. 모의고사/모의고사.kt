@@ -1,24 +1,22 @@
 class Solution {
     var correct = mutableListOf(0, 0, 0)
-    
+
     fun solution(answers: IntArray): IntArray {
         for(idx in answers.indices) {
-            iscorrect(p1, answers, idx, 0)
-            iscorrect(p2, answers, idx, 1)
-            iscorrect(p3, answers, idx, 2)
+            correct[0] += iscorrect(p1, answers, idx)
+            correct[1] += iscorrect(p2, answers, idx)
+            correct[2] += iscorrect(p3, answers, idx)
         }
 
         val maxValue = correct.maxOf { it }
 
-        return correct.mapIndexedNotNull { index, i -> 
+        return correct.mapIndexedNotNull { index, i ->
             if (i == maxValue) index + 1 else null
         }.toIntArray()
     }
 
-    fun iscorrect(p: List<Int>, answers: IntArray, index: Int, type: Int) {
-        if (p[index % p.size] == answers[index]) {
-            correct[type]++
-        }
+    fun iscorrect(p: List<Int>, answers: IntArray, index: Int): Int {
+        return if (p[index % p.size] == answers[index]) 1 else 0
     }
 
     companion object {
