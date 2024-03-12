@@ -1,7 +1,10 @@
 class Solution {
-    val combinationNumbers = mutableListOf<Int>()
+    val combinationNumbers = Array(3) { 0 }
+    var nextInputIndex = 0
+
     val combinationGroup = mutableListOf<List<Int>>()
     lateinit var numbersBackup: IntArray
+
     fun solution(nums: IntArray): Int {
         // 1. 주어진 배열에서 3개씩 뽑는다.
         numbersBackup = nums
@@ -16,14 +19,14 @@ class Solution {
     fun combination(currentIndex: Int, depth: Int) {
         if (depth == goalDepth) {
             // println(combinationNumbers)
-            combinationGroup.add(combinationNumbers.toList())
+            combinationGroup.add(listOf(*combinationNumbers))
             return
         }
 
         for (i in currentIndex until numbersBackup.size) {
-            combinationNumbers.add(numbersBackup[i])
+            combinationNumbers[nextInputIndex++] = (numbersBackup[i])
             combination(i + 1, depth + 1)
-            combinationNumbers.removeAt(combinationNumbers.lastIndex)
+            combinationNumbers[--nextInputIndex] = 0
         }
     }
 
