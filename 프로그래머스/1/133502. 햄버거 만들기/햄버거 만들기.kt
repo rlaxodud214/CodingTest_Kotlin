@@ -4,26 +4,25 @@ class Solution {
     fun solution(ingredient: IntArray): Int {
         var answer: Int = 0
         var stack = Stack<Int>()
+        val goal = listOf(1, 3, 2, 1)
 
-        for (num in ingredient) {
+        outer@ for (num in ingredient) {
             stack.push(num)
 
             if (stack.size < 4 || num != 1) {
                 continue
             }
 
-            var sb = StringBuilder()
-
             for (i in 1..4) {
-                sb.append(stack[stack.size - i])
+                if (goal[i - 1] != stack[stack.size - i]) {
+                    continue@outer
+                }
             }
 
-            if (sb.toString() == "1321") {
-                repeat(4) {
-                    stack.pop()
-                }
-                answer++
+            repeat(4) {
+                stack.pop()
             }
+            answer++
         }
 
         return answer
