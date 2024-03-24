@@ -8,18 +8,15 @@ class Solution {
         for (ch in s) {
             if (x == ' ') {
                 x = ch
+                answer++
                 continue
             }
-            count += if (x == ch) 1 else -1 
+            count += if (x == ch) 1 else -1
 
             if (count == 0) {
                 x = ' '
                 count = 1
-                answer++
             }
-        }
-        if (x != ' ') {
-            answer++
         }
 
         return answer
