@@ -1,26 +1,22 @@
 class Solution {
-    fun solution(s: String): String {
-        var sb = StringBuilder(s.length)
-        var wordIndex = 0
+    fun solution(s: String): String { // "try hello world"
+        var answer = ""
+        var words = s.split(" ").toMutableList() // try
 
-        s.forEach {
-            if (it == ' ') {
-                wordIndex = 0
-                sb.append(it)
-            } else if (it != ' ') {
-                val char = convertCaseByWordIndex(it, wordIndex)
-                wordIndex++
-                sb.append(char)
+        for ((index, str) in words.withIndex()) { // try
+            var temp = ""
+            
+            for (idx in str.indices) {
+                if (idx % 2 == 0) {
+                    temp += str[idx].uppercaseChar()
+                } else {
+                    temp += str[idx].lowercaseChar()
+                }
             }
+            
+            words[index] = temp
         }
-        return sb.toString()
-    }
-
-    fun convertCaseByWordIndex(ch: Char, wordIndex: Int): String {
-        var char = ch.lowercase()
-        if (wordIndex % 2 == 0) {
-            char = ch.uppercase()
-        }
-        return char
+        answer = words.joinToString(" ")
+        return answer
     }
 }
