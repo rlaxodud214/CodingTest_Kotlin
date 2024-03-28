@@ -1,35 +1,25 @@
 class Solution {
     fun solution(id_list: Array<String>, report: Array<String>, k: Int): IntArray {
-        var answer = mutableListOf<Int>()
-        val id_index = mutableMapOf<String, Int>()
-        val flag_data = mutableMapOf<String, MutableSet<String>>()
-        
-        // 0. <id, index> 형태의 Map 셋업
-        for((index, id) in id_list.withIndex()) {
-            answer.add(0)
-            id_index[id] = index
+        val answerMap = id_list.associateWith { 0 }.toMutableMap()
+        val reportUser = mutableMapOf<String, MutableSet<String>>()
+
+        // 1. 유저 별로 신고 당한 고유의 횟수를 파악 + 누가 신고 했는지 체크하기
+        // 신고 당한 사람이 Key값, 신고한 사람이 Value -> <fromID, toID>
+        for ((i, names) in report.withIndex()) {
+            val (toID, fromID) = names.split(" ")
+
+            reportUser.getOrPut(fromID) { mutableSetOf() }.add(toID)
         }
-        
-        // 1. '키 : 신고당한사람', 'value : 신고한 사람들' 형태의 Map 셋업
-        report.forEach {
-            val (from, to) = it.split(" ")
-            
-            if (flag_data.containsKey(to)) { // 이미 존재하는 키인 경우
-                flag_data[to]?.add(from) // 존재하지 않는 키인 경우
-            } else {
-                flag_data[to] = mutableSetOf(from)
+
+        // 2. (신고를 K번 이상 당한 유저들을) 신고한 사람들 뽑기
+        val reportedUsers = reportUser.filter { it.value.size >= k }.values
+
+        for (names in reportedUsers) {
+            for (name in names) {
+                answerMap[name] = answerMap[name]!! + 1
             }
         }
-        
-        // 2. Map을 순회하며 value의 array.size > k 일때, answer에 ++후 반환
-        for ((key, items) in flag_data) {
-            if(items.size < k)
-                continue
-            
-            for (item in items) {
-                answer[id_index[item]!!]++
-            }
-        }
-        return answer.toIntArray()
+
+        return answerMap.values.toIntArray()
     }
 }
