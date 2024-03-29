@@ -2,16 +2,16 @@ class Solution {
     fun solution(s: String): String {
         val numbers = mutableListOf<Int>()
 
-        var sb = StringBuilder()
+        var sb = ""
 
         for (ch in s + ' ') {
             if (ch != ' ') {
-                sb.append(ch)
+                sb += ch
             }
 
             if (ch == ' ') {
-                numbers.add(sb.toString().toInt())
-                sb.clear()
+                numbers.add(sb.toInt())
+                sb = ""
             }
         }
 
