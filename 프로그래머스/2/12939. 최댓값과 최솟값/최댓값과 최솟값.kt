@@ -1,9 +1,21 @@
 class Solution {
     fun solution(s: String): String {
-        var answer = s.split(" ")
-            .map { it.toInt() }
+        val numbers = mutableListOf<Int>()
+
+        var sb = StringBuilder()
+
+        for (ch in s + ' ') {
+            if (ch != ' ') {
+                sb.append(ch)
+            }
+
+            if (ch == ' ') {
+                numbers.add(sb.toString().toInt())
+                sb.clear()
+            }
+        }
 
         // min, max -> unresolved reference 오류남
-        return "${answer.minOf{ it }} ${answer.maxOf{ it }}"
+        return "${numbers.minOf{ it }} ${numbers.maxOf{ it }}"
     }
 }
