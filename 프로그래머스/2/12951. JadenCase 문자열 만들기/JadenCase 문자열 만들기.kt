@@ -1,21 +1,25 @@
 class Solution {
     fun solution(s: String): String {
         var answer = StringBuilder()
+        val words = s.split(" ")
 
-        for (word in s.split(" ")) {
-            for (i in word.indices) {
-                if (i == 0) {
-                    if (word[i] in 'a'..'z') {
-                        answer.append(word[i].uppercaseChar())
-                    } else {
-                        answer.append(word[i])
-                    }
-                    continue
-                }
-
-                answer.append(word[i].lowercaseChar())
+        for (word in words) {
+            // 공백이 이어서 들어온 경우를 처리한다.
+            if(word.length == 0) {
+                answer.append(" ")
+                continue
             }
-            answer.append(' ')
+            
+            // 단어의 첫 문자를 처리한다.
+            if (word[0] in 'a'..'z') {
+                answer.append(word[0].uppercaseChar())
+            } else {
+                answer.append(word[0])
+            }
+
+            // 나머지 단어를 처리한다.
+            val lastWord = word.drop(1)
+            answer.append(lastWord.toLowerCase(), ' ')
         }
 
         return answer.toString().dropLast(1)
