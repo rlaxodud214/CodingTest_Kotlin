@@ -7,14 +7,14 @@ class Solution {
      */
     fun solution(k: Int, tangerine: IntArray): Int {
         // 1. tangerine에서 각 요소의 개수를 뽑는다. -> 내림차순으로 정렬 -> 시간 오래 걸릴 듯
-        val numCounts = IntArray(10_000_001) { 0 }
+        val numCounts = mutableMapOf<Int, Int>()
 
-        for (i in tangerine) {
-            numCounts[i]++
+        for (num in tangerine) {
+            numCounts[num] = numCounts.getOrPut(num) { 0 } + 1
         }
 
         val pq = PriorityQueue<Int>(Collections.reverseOrder())
-        numCounts.forEach {
+        numCounts.values.forEach {
             if (it != 0) {
                 pq.add(it)
             }
