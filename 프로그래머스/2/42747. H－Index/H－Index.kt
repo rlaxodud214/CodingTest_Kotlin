@@ -1,14 +1,20 @@
+import java.util.*
+
 class Solution {
     fun solution(citations: IntArray): Int {
-        var desSorted = citations.sortedArrayDescending()
         var answer = 0
         
-        for(idx in citations.indices) { // 0, 1, 2, 3, 4
-            if(desSorted[idx] >= idx+1) {
-                answer = idx+1
-            }
+        val pq = PriorityQueue<Int>(Collections.reverseOrder())
+        citations.forEach {
+            pq.add(it)
         }
         
+        for (index in pq.indices) {
+            if (pq.poll() >= index + 1) {
+                answer = index + 1
+            }
+        }
+
         return answer
     }
 }
