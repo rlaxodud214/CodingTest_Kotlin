@@ -4,7 +4,7 @@ class Solution {
     fun solution(s: String): Int {
         var answer: Int = 0
         val texts = Array(s.length) { s }
-        
+
         // 1. 괄호 회전하기
         for (i in 0 until texts.size) {
             var sb = StringBuilder()
@@ -29,12 +29,9 @@ class Solution {
 
         for (ch in text) {
             when(ch) {
-                '(', '{', '[' -> stack.add(ch)
-                ')', '}', ']' -> {
-                    if (stack.isEmpty()) {
-                        return false
-                    }
-                    if (stack.pop() != pairs[ch]) {
+                in "({[" -> stack.add(ch)
+                in ")}]" -> {
+                    if (stack.isEmpty() || stack.pop() != pairs[ch]) {
                         return false
                     }
                 }
