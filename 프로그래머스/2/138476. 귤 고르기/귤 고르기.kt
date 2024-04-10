@@ -5,12 +5,13 @@ class Solution {
      */
     fun solution(k: Int, tangerine: IntArray): Int {
         // 1. tangerine에서 각 요소의 개수를 뽑는다. -> 내림차순으로 정렬 -> 시간 오래 걸릴 듯
-        val numCounts = tangerine
-            .groupBy { it }
-            .mapValues { it.value.size }
-            .values
-            .sortedDescending()
-
+        val numCounts = IntArray(10_000_001) { 0 }
+        
+        for (i in tangerine) {
+            numCounts[i]++    
+        }
+        numCounts.sortDescending()
+        
         // 2. 요소의 개수를 더하다가 K보다 커지면 종료
         var count: Int = 0
 
