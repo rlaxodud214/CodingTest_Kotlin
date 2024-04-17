@@ -16,15 +16,11 @@ class Solution {
                 countByDiscount[name] = countByDiscount.getOrPut(name) { 0 }.plus(1)
             }
 
-            var isEnough = true
-            for (k in 0 until countByProduct.size) {
-                val key = want[k]
-                if (countByProduct[key]!! > countByDiscount[key]!!) {
-                    isEnough = false
-                }
+            val isWorngCase = countByProduct.any {
+                countByProduct[it.key]!! > countByDiscount[it.key]!!
             }
 
-            if (isEnough) {
+            if (!isWorngCase) {
                 answer++
             }
 
@@ -32,7 +28,6 @@ class Solution {
                 countByDiscount[it] = 0
             }
         }
-
 
         return answer
     }
